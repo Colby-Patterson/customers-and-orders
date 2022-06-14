@@ -5,3 +5,8 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+
+c1 = Customer.create(name: 'John Peterson', address: '1234 River Road')
+c2 = Customer.create(name: 'Jake Johanson', address: '1234 Robin Road')
+
+c1.orders.create(product_name: 'Computer Mouse', quantity: 1, total_price: 22.99)

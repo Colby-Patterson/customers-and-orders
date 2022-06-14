@@ -13,9 +13,7 @@ const Customers = () => {
   const getCustomers = async () => {
     try {
       let res = await axios.get('/api/customers')
-      // console.log(res)
       setCustomers(res.data)
-      // console.log(customers)
       setLoading(false)
     } catch(err){
       setLoading(false)

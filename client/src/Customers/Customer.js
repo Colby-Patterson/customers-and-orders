@@ -1,7 +1,8 @@
-const Customer = ({name}) => {
+const Customer = ({name, address}) => {
   return (
     <div>
-      <p>{name}</p>
+      <p>Name: {name}</p>
+      <p>Address: {address}</p>
     </div>
   )
 }

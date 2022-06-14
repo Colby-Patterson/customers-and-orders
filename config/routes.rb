@@ -6,5 +6,6 @@ Rails.application.routes.draw do
   namespace :api do
     resources :customers do
       resources :books
+    end
   end
 end

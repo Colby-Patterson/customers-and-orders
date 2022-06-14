@@ -1,11 +1,10 @@
 import { Link, Outlet } from "react-router-dom"
 
-const PageWrapper = () => {
+const CustomerPageWrapper = () => {
   return (
     <div>
       <div>
-        <Link to='/'>Home</Link>
-        <Link to='/customers'>Customers</Link>
+        <Link to='/customers'>Show All Customers</Link>
       </div>
       <div>
         <Outlet />
@@ -14,4 +13,4 @@ const PageWrapper = () => {
   )
 }
 
-export default PageWrapper
+export default CustomerPageWrapper

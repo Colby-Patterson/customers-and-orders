@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import axios from 'axios'
+import Customer from "./Customer"
 
 const Customers = () => {
   const [customers, setCustomers] = useState([])
@@ -11,8 +12,10 @@ const Customers = () => {
 
   const getCustomers = async () => {
     try {
-      let res = axios.get('/api/customers')
-      setCustomers((await res).data)
+      let res = await axios.get('/api/customers')
+      // console.log(res)
+      setCustomers(res.data)
+      // console.log(customers)
       setLoading(false)
     } catch(err){
       setLoading(false)
@@ -21,9 +24,14 @@ const Customers = () => {
     }
   }
 
+  const renderCustomers = () => {
+    return customers.map(c=> <Customer key={c.id} {...c} />)
+  }
+
   return (
     <div>
-
+      List of customers
+      {renderCustomers()}
     </div>
   )
 }

@@ -5,6 +5,7 @@ export const DataContext = React.createContext()
 
 const DataProvider = (props) => {
   const [customers, setCustomers] = useState([])
+  const [customerOrders, setCustomerOrders] = useState(null)
 
   useEffect(()=>{
     getCustomers()
@@ -13,7 +14,6 @@ const DataProvider = (props) => {
   const getCustomers = async () => {
     try {
       let res = await axios.get('/api/customers')
-      console.log(res)
       setCustomers(res.data)
     } catch(err){
       console.log(err)
@@ -30,6 +30,17 @@ const DataProvider = (props) => {
     }
   }
 
+  const updateCustomer = async (customer) => {
+    try {
+      let res = await axios.put(`/api/customers/${customer.id}`, customer)
+      console.log('Data from updateCustomer')
+      console.log(res.data)
+      setCustomers([res.data, ...customers])
+    } catch(err) {
+      alert('Error occurred in updateCustomer')
+    }
+  }
+
   const deleteCustomer = async (id) => {
     try {
       let res = await axios.delete(`/api/customers/${id}`)
@@ -40,8 +51,18 @@ const DataProvider = (props) => {
     }
   }
 
+  const getCustomerOrders = async (id) => {
+    try {
+      let res = await axios.get(`api/customers/${id}/orders`)
+      console.log(res.data)
+      setCustomerOrders(res.data)
+    } catch(err) {
+      alert('Error occurred in getCustomerOrders')
+    }
+  }
+
   return (
-    <DataContext.Provider value={{customers, getCustomers, addCustomer, deleteCustomer}}>
+    <DataContext.Provider value={{customers, customerOrders,  getCustomers, addCustomer, deleteCustomer, updateCustomer, getCustomerOrders}}>
       {props.children}
     </DataContext.Provider>
   )

@@ -4,7 +4,7 @@ import Customer from "./Customer"
 import { DataContext } from "../providers/DataProvider"
 
 const Customers = () => {
-  const {customers, addCustomer} = useContext(DataContext)
+  const {customers, addCustomer, deleteCustomer} = useContext(DataContext)
   // const [customers, setCustomers] = useState([])
   const [loading, setLoading] = useState(true)
 
@@ -34,6 +34,8 @@ const Customers = () => {
       {renderCustomers()}
       <h1>Test Buttons</h1>
       <button onClick={()=> addCustomer({name: 'New Customer', address: '1234 New Road'})}>Add Test Customer</button>
+      <br />
+      <button onClick={()=> deleteCustomer(customers[0].id)}>Delete a customer</button>
     </div>
   )
 }

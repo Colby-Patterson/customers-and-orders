@@ -17,7 +17,7 @@ const DataProvider = (props) => {
       setCustomers(res.data)
     } catch(err){
       console.log(err)
-      alert('Error has occured in get customers')
+      alert('Error has occurred in get customers')
     }
   }
 
@@ -26,12 +26,22 @@ const DataProvider = (props) => {
       let res = await axios.post('/api/customers', customer)
       setCustomers([res.data, ...customers])
     } catch(err) {
-      alert('Error occured in addCustomer')
+      alert('Error occurred in addCustomer')
+    }
+  }
+
+  const deleteCustomer = async (id) => {
+    try {
+      let res = await axios.delete(`/api/customers/${id}`)
+      let newCustomers = customers.filter(c=> c.id !== id)
+      setCustomers(newCustomers)
+    } catch (err) {
+      alert('Error occurred in deleteCustomer')
     }
   }
 
   return (
-    <DataContext.Provider value={{customers, getCustomers, addCustomer}}>
+    <DataContext.Provider value={{customers, getCustomers, addCustomer, deleteCustomer}}>
       {props.children}
     </DataContext.Provider>
   )

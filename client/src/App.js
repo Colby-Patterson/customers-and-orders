@@ -5,6 +5,7 @@ import Home from './Home';
 import CustomerPageWrapper from './Customers/CustomerPageWrapper';
 import Customers from './Customers/Customers';
 import CustomerShow from './Customers/CustomerShow';
+import CustomerForm from './Customers/CustomerForm';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path='/customers' element={<CustomerPageWrapper />}>
           <Route index element={<Customers />} />
           <Route path='/customers/:id' element={<CustomerShow />} />
+          <Route path='/customers/new' element={<CustomerForm />} />
         </Route>
       </Route>
     </Routes>

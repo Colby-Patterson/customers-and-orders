@@ -4,7 +4,7 @@ import Customer from "./Customer"
 import { DataContext } from "../providers/DataProvider"
 
 const Customers = () => {
-  const {customers, customerOrders, addCustomer, deleteCustomer, updateCustomer, getCustomerOrders} = useContext(DataContext)
+  const {customers, customerOrders, addCustomer, deleteCustomer, updateCustomer, getCustomerOrders, addCustomerOrder, updateCustomerOrder} = useContext(DataContext)
   // const [customers, setCustomers] = useState([])
   const [loading, setLoading] = useState(true)
 
@@ -41,6 +41,8 @@ const Customers = () => {
       <br />
       <h1>Test Buttons for Customer Orders</h1>
       <button onClick={()=> getCustomerOrders(customers[0].id)}>Show First Customer's Orders</button>
+      <button onClick={()=> addCustomerOrder(customers[0].id, {product_name: 'Test Product', quantity: 1, total_price: 10.00})}>Add Customer Order</button>
+      <button onClick={()=> updateCustomerOrder(customers[0].id, {id: 1, product_name: 'Updated', quantity: 2, total_price: 12.00})}>Update Customer Order</button>
       <p>{JSON.stringify(customerOrders)}</p>
     </div>
   )

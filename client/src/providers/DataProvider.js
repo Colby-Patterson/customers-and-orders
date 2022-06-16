@@ -51,9 +51,9 @@ const DataProvider = (props) => {
     }
   }
 
-  const getCustomerOrders = async (id) => {
+  const getCustomerOrders = async (customer_id) => {
     try {
-      let res = await axios.get(`api/customers/${id}/orders`)
+      let res = await axios.get(`/api/customers/${customer_id}/orders`)
       console.log(res.data)
       setCustomerOrders(res.data)
     } catch(err) {
@@ -61,8 +61,37 @@ const DataProvider = (props) => {
     }
   }
 
+  const addCustomerOrder = async (customer_id, order) => {
+    try {
+      let res = await axios.post(`/api/customers/${customer_id}/orders`, order)
+      let newOrders = customerOrders.map(o=> o.id)
+    } catch(err) {
+      alert('Error occurred in addCustomerOrder')
+    }
+  }
+
+  const updateCustomerOrder = async (customer_id, order) => {
+    try {
+      let res = await axios.put(`/api/customers/${customer_id}/orders/${order.id}`, order)
+      let newOrders = customerOrders.map(o=> o.id === res.data.id ? res.data : o)
+      setCustomerOrders(newOrders)
+    } catch(err) {
+      alert('Error occurred in updateCustomerOder')
+    }
+  }
+
+  const deleteCustomerOrder = async (customer_id, order_id) => {
+    try {
+      let res = await axios.delete(`/api/customers/${customer_id}/orders/${order_id}`)
+      let newOrders = customerOrders.filter(o=> o.id !== order_id)
+      setCustomerOrders(newOrders)
+    } catch(err) {
+      alert('Error occurred in deleteCustomerOrder')
+    }
+  }
+
   return (
-    <DataContext.Provider value={{customers, customerOrders,  getCustomers, addCustomer, deleteCustomer, updateCustomer, getCustomerOrders}}>
+    <DataContext.Provider value={{customers, customerOrders,  getCustomers, addCustomer, deleteCustomer, updateCustomer, getCustomerOrders, addCustomerOrder, updateCustomerOrder}}>
       {props.children}
     </DataContext.Provider>
   )
